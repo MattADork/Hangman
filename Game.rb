@@ -1,5 +1,7 @@
 require_relative 'ASCII_Hangman'
 
+$guesses = []
+
 def prompt
   print "> "
 end
@@ -12,16 +14,28 @@ def pick_word
     puts "Sorry, only one word allowed"
     return pick_word
   end
+  puts "\n" * 25
+  puts "Word received!"
+  puts
   return word
 end
 
 def pick_a_letter
+  puts "Guesses so far: #{$guesses.sort.join}"
+  puts
   puts "Go ahead and guess a letter"
   prompt
   guess = gets.chomp.downcase
   if guess.length != 1
     puts "Hey, guess exactly one letter!"
     return pick_a_letter
+  end
+  if $guesses.length > 0
+    $guesses[-1] += ", "
+    $guesses.push(guess)
+  end
+  if $guesses.length == 0
+    $guesses.push(guess)
   end
   return guess
 end
