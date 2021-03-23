@@ -29,29 +29,46 @@ end
 def initialize_board
   word = pick_word
   underscores = word.length
-  word_game = []
+  $word_game = []
   $incorrect = 0
-  while word_game.length < underscores
-    word_game.push("_ ")
+  while $word_game.length < underscores
+    $word_game.push("_ ")
   end
-  print word_game
+  print $word_game
   puts HANGMANPICS[$incorrect]
   puts "_ " * underscores
   return word
 end
 
 def check(guess, word)
-  word_array = word.split("")
+  $word_array = word.split("")
   i = 0
   correct_guesses = []
-  while i < word_array.length
-    if word_array[i] == guess
+  while i < $word_array.length
+    if $word_array[i] == guess
       correct_guesses.push(i)
     end
     i += 1
   end
   return correct_guesses
 end
+
+def correct_guess(result)
+  puts "That's correct!"
+  puts HANGMANPICS[$incorrect]
+  while result.length > 0
+    $word_game[result[0]] = $word_array[result[0]]
+    result.shift
+  end
+  print $word_game.join
+  puts
+  if $word_game.include?("_ ") == false
+    puts "Congratulations! You've won the game!"
+    exit
+  end
+  return guess_and_check($word)
+end
+
 
 def incorrect_guess(word)
   puts "Sorry, that's incorrect!"
@@ -68,9 +85,11 @@ end
 def guess_and_check(word)
   guess = pick_a_letter
   result = check(guess, word)
-  print result
   if result == []
     incorrect_guess(word)
+  elsif
+    correct_guess(result)
+  end
 end
 
 def play_game
