@@ -33,6 +33,8 @@ def pick_a_letter
   end
   if $organized_guesses.include?(guess) or $organized_guesses.include?(guess + ", ")
     puts "You've already guessed that letter..."
+    puts HANGMANPICS[$incorrect]
+    puts $word_game.join
     return pick_a_letter
   end
   $guesses.push(guess)
@@ -61,7 +63,6 @@ def initialize_board
   while $word_game.length < underscores
     $word_game.push("_ ")
   end
-  print $word_game
   puts HANGMANPICS[$incorrect]
   puts "_ " * underscores
   return word
@@ -106,6 +107,7 @@ def incorrect_guess(word)
     exit
   end
   puts HANGMANPICS[$incorrect]
+  puts $word_game.join
   return guess_and_check($word)
 end
 
