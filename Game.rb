@@ -1,4 +1,5 @@
 require_relative 'ASCII_Hangman'
+require 'io/console'
 
 $guesses = []
 
@@ -6,18 +7,32 @@ def prompt
   print "> "
 end
 
-def pick_word
-  puts "Pick a word (Don't let your opponent see!)"
-  prompt
-  word = gets.chomp.downcase
-  if word.include?(" ")
-    puts "Sorry, only one word allowed"
-    return pick_word
-  end
-  puts "\n" * 25
-  puts "Word received!"
-  puts
+def random_word
+  word = WORDS[rand(29)]
   return word
+end
+
+def pick_word
+  puts "Would you like to play with a random word? (y/n)"
+  prompt
+  answer = gets.chomp.downcase
+  if answer == "y" or answer == "yes"
+    word = random_word
+    return word
+  else
+    puts "Pick a word (Don't let your opponent see!)"
+    prompt
+    word = STDIN.noecho(&:gets).chomp.downcase
+    if word.include?(" ")
+      puts "Sorry, only one word allowed"
+      return pick_word
+    end
+    puts 
+    puts 
+    puts "Word received!"
+    puts
+    return word
+  end
 end
 
 def pick_a_letter

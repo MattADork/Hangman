@@ -48,3 +48,9 @@ HANGMANPICS = ['''
  / \  |
       |
 =========''']
+
+WORDS = ["geography", "cat", "yesterday", "java", "truck", "opportunity",
+"fish", "token", "transportation", "bottom", "apple", "cake",
+"remote", "boots", "terminology", "arm", "cranberry", "tool",
+"caterpillar", "spoon", "watermelon", "laptop", "toe", "toad",
+"fundamental", "capitol", "garbage", "anticipate", "pesky"]
