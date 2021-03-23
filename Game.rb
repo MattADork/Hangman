@@ -21,7 +21,8 @@ def pick_word
 end
 
 def pick_a_letter
-  puts "Guesses so far: #{$guesses.sort.join}"
+  $organized_guesses = organize($guesses)
+  puts "Guesses so far: #{$organized_guesses}"
   puts
   puts "Go ahead and guess a letter"
   prompt
@@ -30,14 +31,26 @@ def pick_a_letter
     puts "Hey, guess exactly one letter!"
     return pick_a_letter
   end
-  if $guesses.length > 0
-    $guesses[-1] += ", "
-    $guesses.push(guess)
+  if $organized_guesses.include?(guess) or $organized_guesses.include?(guess + ", ")
+    puts "You've already guessed that letter..."
+    return pick_a_letter
   end
-  if $guesses.length == 0
-    $guesses.push(guess)
-  end
+  $guesses.push(guess)
   return guess
+end
+
+def organize(array)
+  temp_value = 0
+  if array.length > 0
+    temp_value = array.sort[-1]
+  end
+  array = array.uniq
+  new_array = array.sort.map { |value| value = value + ", "}
+  if temp_value != 0
+    new_array[-1] = temp_value
+  end
+  puts
+  return new_array.join
 end
 
 def initialize_board
