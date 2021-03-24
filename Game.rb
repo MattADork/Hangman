@@ -2,6 +2,7 @@ require_relative 'ASCII_Hangman'
 require 'io/console'
 
 $guesses = []
+$lives = 8
 
 def prompt
   print "> "
@@ -38,6 +39,7 @@ end
 def pick_a_letter
   $organized_guesses = organize($guesses)
   puts "Guesses so far: #{$organized_guesses}"
+  puts "Lives left #{$lives}"
   puts
   puts "Go ahead and guess a letter"
   prompt
@@ -116,6 +118,7 @@ end
 def incorrect_guess(word)
   puts "Sorry, that's incorrect!"
   $incorrect += 1
+  $lives -= 1
   if $incorrect == HANGMANPICS.length
     puts HANGMANPICS[7]
     puts "\nSorry... You lose this time\n"
