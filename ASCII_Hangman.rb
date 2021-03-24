@@ -47,6 +47,13 @@ HANGMANPICS = ['''
  /|\  |
  / \  |
       |
+=========''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+------|
 =========''']
 
 WORDS = ["geography", "cat", "yesterday", "java", "truck", "opportunity",

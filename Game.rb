@@ -8,7 +8,7 @@ def prompt
 end
 
 def random_word
-  word = WORDS[rand(29)]
+  word = WORDS[rand(WORDS.length)]
   return word
 end
 
@@ -116,9 +116,12 @@ end
 def incorrect_guess(word)
   puts "Sorry, that's incorrect!"
   $incorrect += 1
-  if $incorrect == word.length + 1
-    puts HANGMANPICS[6]
+  if $incorrect == HANGMANPICS.length
+    puts HANGMANPICS[7]
     puts "\nSorry... You lose this time\n"
+    puts
+    puts "The word was " + $word_array.join + "."
+    puts
     exit
   end
   puts HANGMANPICS[$incorrect]
