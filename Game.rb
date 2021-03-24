@@ -109,11 +109,23 @@ def correct_guess(result)
   puts
   if $word_game.include?("_ ") == false
     puts "Congratulations! You've won the game!"
-    exit
+    puts
+    play_again
   end
   return guess_and_check($word)
 end
 
+def play_again
+  puts "Would you like to play again? (y/n)"
+  prompt
+  play_more = gets.chomp.downcase
+  puts
+  if play_more == "y" or play_more == "yes"
+    return play_game
+  else
+    exit
+  end
+end
 
 def incorrect_guess(word)
   puts "Sorry, that's incorrect!"
@@ -125,7 +137,7 @@ def incorrect_guess(word)
     puts
     puts "The word was " + $word_array.join + "."
     puts
-    exit
+    play_again
   end
   puts HANGMANPICS[$incorrect]
   puts $word_game.join
@@ -143,6 +155,8 @@ def guess_and_check(word)
 end
 
 def play_game
+  $guesses = []
+  $lives = 8
   $word = initialize_board
   guess_and_check($word)
 end
